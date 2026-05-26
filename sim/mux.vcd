@@ -1,0 +1,95 @@
+$date
+	Tue May 26 03:50:48 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_MUX $end
+$var wire 16 ! out4 [15:0] $end
+$var wire 16 " out2 [15:0] $end
+$var reg 16 # in1 [15:0] $end
+$var reg 16 $ in2 [15:0] $end
+$var reg 16 % in3 [15:0] $end
+$var reg 16 & in4 [15:0] $end
+$var reg 2 ' sel [1:0] $end
+$scope module text_mux_2 $end
+$var wire 32 ( data_in [31:0] $end
+$var wire 1 ) sel $end
+$var wire 16 * out [15:0] $end
+$var parameter 32 + INPUT_WIDTH $end
+$var parameter 32 , SELECT_BITS $end
+$upscope $end
+$scope module text_mux_4 $end
+$var wire 64 - data_in [63:0] $end
+$var wire 2 . sel [1:0] $end
+$var wire 16 / out [15:0] $end
+$var parameter 32 0 INPUT_WIDTH $end
+$var parameter 32 1 SELECT_BITS $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10 1
+b100 0
+b1 ,
+b10 +
+$end
+#0
+$dumpvars
+bx /
+bx0 .
+b111000000000000000100000000000000000000000000101010 -
+b101010 *
+0)
+b101010 (
+bx0 '
+b111 &
+b1 %
+b0 $
+b101010 #
+b101010 "
+bx !
+$end
+#10000
+b0 "
+b0 *
+1)
+bx1 '
+bx1 .
+#20000
+b101010 "
+b101010 *
+0)
+b101010 !
+b101010 /
+b0 '
+b0 .
+#30000
+b0 "
+b0 *
+1)
+b0 !
+b0 /
+b1 '
+b1 .
+#40000
+b101010 "
+b101010 *
+0)
+b1 !
+b1 /
+b10 '
+b10 .
+#50000
+b0 "
+b0 *
+1)
+b111 !
+b111 /
+b11 '
+b11 .
+#60000
