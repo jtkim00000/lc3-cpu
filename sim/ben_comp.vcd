@@ -1,0 +1,39 @@
+$date
+	Tue May 26 04:26:34 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_BEN_COMP $end
+$var wire 1 ! ben $end
+$var reg 3 " ir [2:0] $end
+$var reg 3 # nzp [2:0] $end
+$scope module test_ben_comp $end
+$var wire 1 ! ben $end
+$var wire 3 $ ir [2:0] $end
+$var wire 3 % nzp [2:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1 %
+b100 $
+b1 #
+b100 "
+0!
+$end
+#10
+1!
+b100 #
+b100 %
+#20
+b111 #
+b111 %
+#30
