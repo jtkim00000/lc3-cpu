@@ -84,7 +84,7 @@ module tb_ALU;
             $display("FAIL, PASS: expected 4242, got %0h", s);
         else
             $display("PASS, PASS");
-
+        $finish;
     end
 
 endmodule

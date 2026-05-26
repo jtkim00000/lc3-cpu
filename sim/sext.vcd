@@ -1,0 +1,122 @@
+$date
+	Tue May 26 02:18:45 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_SEXT $end
+$var wire 16 ! out9 [15:0] $end
+$var wire 16 " out6 [15:0] $end
+$var wire 16 # out5 [15:0] $end
+$var wire 16 $ out11 [15:0] $end
+$var reg 11 % PCoffset11 [10:0] $end
+$var reg 9 & PCoffset9 [8:0] $end
+$var reg 5 ' imm5 [4:0] $end
+$var reg 6 ( offset6 [5:0] $end
+$scope module test_PCoffset11 $end
+$var wire 11 ) data_in [10:0] $end
+$var wire 16 * data_out [15:0] $end
+$var parameter 32 + WIDTH $end
+$upscope $end
+$scope module test_PCoffset9 $end
+$var wire 9 , data_in [8:0] $end
+$var wire 16 - data_out [15:0] $end
+$var parameter 32 . WIDTH $end
+$upscope $end
+$scope module test_imm5 $end
+$var wire 5 / data_in [4:0] $end
+$var wire 16 0 data_out [15:0] $end
+$var parameter 32 1 WIDTH $end
+$upscope $end
+$scope module test_offset6 $end
+$var wire 6 2 data_in [5:0] $end
+$var wire 16 3 data_out [15:0] $end
+$var parameter 32 4 WIDTH $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b110 4
+b101 1
+b1001 .
+b1011 +
+$end
+#0
+$dumpvars
+bx 3
+bx 2
+b11 0
+b11 /
+bx -
+bx ,
+bx *
+bx )
+bx (
+b11 '
+bx &
+bx %
+bx $
+b11 #
+bx "
+bx !
+$end
+#10000
+b1111111111111110 #
+b1111111111111110 0
+b11110 '
+b11110 /
+#20000
+b0 #
+b0 0
+b0 '
+b0 /
+#30000
+b11 "
+b11 3
+b11 (
+b11 2
+#40000
+b1111111111111110 "
+b1111111111111110 3
+b111110 (
+b111110 2
+#50000
+b0 "
+b0 3
+b0 (
+b0 2
+#60000
+b11 !
+b11 -
+b11 &
+b11 ,
+#70000
+b1111111111111110 !
+b1111111111111110 -
+b111111110 &
+b111111110 ,
+#80000
+b0 !
+b0 -
+b0 &
+b0 ,
+#90000
+b11 $
+b11 *
+b11 %
+b11 )
+#100000
+b1111111111111110 $
+b1111111111111110 *
+b11111111110 %
+b11111111110 )
+#110000
+b0 $
+b0 *
+b0 %
+b0 )
+#120000
