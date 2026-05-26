@@ -1,0 +1,59 @@
+$date
+	Tue May 26 00:24:50 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_Register $end
+$var wire 16 ! rdata [15:0] $end
+$var reg 1 " clk $end
+$var reg 1 # ld $end
+$var reg 16 $ wdata [15:0] $end
+$scope module test_register $end
+$var wire 1 " clk $end
+$var wire 1 # ld $end
+$var wire 16 % rdata [15:0] $end
+$var wire 16 & wdata [15:0] $end
+$var reg 16 ' register [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx '
+b101010 &
+bx %
+b101010 $
+1#
+0"
+bx !
+$end
+#20000
+b101010 !
+b101010 %
+b101010 '
+1"
+#22000
+0#
+#32000
+b1000011 $
+b1000011 &
+#40000
+0"
+#60000
+1"
+#80000
+0"
+#100000
+1"
+#120000
+0"
+#140000
+1"
+#152000
