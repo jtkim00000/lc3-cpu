@@ -1,0 +1,39 @@
+$date
+	Tue May 26 02:24:49 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_ZEXT $end
+$var wire 16 ! data_out [15:0] $end
+$var reg 8 " data_in [7:0] $end
+$scope module test_zext $end
+$var wire 8 # data_in [7:0] $end
+$var wire 16 $ data_out [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b11 $
+b11 #
+b11 "
+b11 !
+$end
+#10000
+b11101110 !
+b11101110 $
+b11101110 "
+b11101110 #
+#20000
+b0 !
+b0 $
+b0 "
+b0 #
+#30000
