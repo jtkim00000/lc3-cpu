@@ -8,7 +8,8 @@ module sram (
     output reg [15:0] data_out
 ); // 64k x 16 RAM
     reg [1:0] counter;
-    reg [15:0] mem [65535:0];
+    //smaller memory for testing
+    reg [15:0] mem [65536:0];
 
     //counter for ready signal is not needed but good practice
     always @(posedge clk) begin
