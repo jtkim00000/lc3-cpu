@@ -40,6 +40,7 @@ module lc3_cpu ();
 
     //Other
     wire [15:0] addr_add_out;
+    assign addr_add_out = addr1mux_out + addr2mux_out;
 
     //Control Signals
     wire rw, mio_en;
