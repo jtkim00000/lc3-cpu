@@ -1,6 +1,4 @@
-module lc3_cpu ();
-
-    reg clk;
+module lc3_cpu (input clk);
 
     /*
         Below are the wires that connect modules together
@@ -105,7 +103,7 @@ module lc3_cpu ();
     mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) sr2mux (
         .data_in({sext_5_out, sr2_out}),
         .sel(ir_out[5]),
-        .out(sr1mux_out)
+        .out(sr2mux_out)
     );
 
     mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) addr1mux (
@@ -117,7 +115,7 @@ module lc3_cpu ();
     mux #(.INPUT_WIDTH(4), .SELECT_BITS(2)) addr2mux (
         .data_in({sext_11_out, sext_9_out, sext_6_out, 16'd0}),
         .sel(addr2_mux),
-        .data_out(addr2mux_out)
+        .out(addr2mux_out)
     );
 
     mux #(.INPUT_WIDTH(3), .SELECT_BITS(2)) pcmux (
@@ -132,7 +130,7 @@ module lc3_cpu ();
         .out(drmux_out)
     );
 
-    mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) drmux (
+    mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) sr1mux (
         .data_in({3'b110, ir_out[8:6], ir_out[11:9]}),
         .sel(sr1_mux),
         .out(sr1mux_out)
@@ -222,5 +220,13 @@ module lc3_cpu ();
         .RW(rw),
         .ALUK(aluk)
     );
+
+    //Tri-state buffer for Gates
+
+    assign bus =    gate_pc     ? pc_out     :
+                    gate_mdr    ? mdr_out    :
+                    gate_alu    ? alu_out    :
+                    gate_marmux ? marmux_out :
+                    16'h0000;
 
 endmodule
