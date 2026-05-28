@@ -25,7 +25,8 @@ module lc3_cpu ();
 
     //Other Registers
     wire [15:0] pc_out;
-    wire n_out, z_out, p_out;
+    wire nzp_out;
+    wire ben_comp_reg_out;
 
     //Branch Enable
     wire [2:0] nzp_logic_out;
@@ -167,7 +168,13 @@ module lc3_cpu ();
 
     //NEED NZP Register
 
-    //NEED TO CHANGE BEN COMP
+    ben_comp ben_comp (
+        .nzp(nzp_out),
+        .ir(ir[11:9]),
+        .ben(ben_comp_out)
+    );
+
+    //NEED BEN COMP Reg
 
     //Control
     control control (
@@ -196,12 +203,5 @@ module lc3_cpu ();
         .RW(rw),
         .ALUK(aluk)
     );
-
-
-
-    
-
-
-
 
 endmodule
