@@ -83,11 +83,11 @@ module lc3_cpu ();
     );
 
     //EXT
-    sext #(5) sext_5 (.data_in(ir[4:0]), .data_out(sext_5_out));
-    sext #(6) sext_6 (.data_in(ir[5:0]), .data_out(sext_6_out));
-    sext #(9) sext_9 (.data_in(ir[8:0]), .data_out(sext_9_out));
-    sext #(11) sext_11 (.data_in(ir[10:0]), .data_out(sext_11_out));
-    zext zext (.data_in(ir[7:0]), .data_out(zext_out));
+    sext #(5) sext_5 (.data_in(ir_out[4:0]), .data_out(sext_5_out));
+    sext #(6) sext_6 (.data_in(ir_out[5:0]), .data_out(sext_6_out));
+    sext #(9) sext_9 (.data_in(ir_out[8:0]), .data_out(sext_9_out));
+    sext #(11) sext_11 (.data_in(ir_out[10:0]), .data_out(sext_11_out));
+    zext zext (.data_in(ir_out[7:0]), .data_out(zext_out));
 
     //Muxes
     mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) miomux (
@@ -104,7 +104,7 @@ module lc3_cpu ();
 
     mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) sr2mux (
         .data_in({sext_5_out, sr2_out}),
-        .sel(ir[5]),
+        .sel(ir_out[5]),
         .out(sr1mux_out)
     );
 
@@ -127,13 +127,13 @@ module lc3_cpu ();
     );
 
     mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) drmux (
-        .data_in({3'b110, 3'b111, ir[11:9]}),
+        .data_in({3'b110, 3'b111, ir_out[11:9]}),
         .sel(dr_mux),
         .out(drmux_out)
     );
 
     mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) drmux (
-        .data_in({3'b110, ir[8:6], ir[11:9]}),
+        .data_in({3'b110, ir_out[8:6], ir_out[11:9]}),
         .sel(sr1_mux),
         .out(sr1mux_out)
     );
@@ -143,7 +143,7 @@ module lc3_cpu ();
         .clk(clk),
         .ld(ld_reg),
         .sr1(sr1mux_out),
-        .sr2(ir[2:0]),
+        .sr2(ir_out[2:0]),
         .dr(drmux_out),
         .wdata(bus),
         .sr1_out(sr1_out),
@@ -184,7 +184,7 @@ module lc3_cpu ();
 
     ben_comp ben_comp (
         .nzp(nzp_out),
-        .ir(ir[11:9]),
+        .ir(ir_out[11:9]),
         .ben(ben_comp_out)
     );
 
