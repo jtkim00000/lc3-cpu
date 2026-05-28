@@ -1,6 +1,4 @@
 
-
-
 //all caps is used for easier wiring of datapath
 module control (
     input R,
@@ -35,6 +33,37 @@ module control (
     output [1:0] ALUK
 );
 
+    reg [5:0] STATE;
 
+    // Microsequencer
+    reg IRD;
+    reg [2:0] COND;
+    reg [5:0] J;
+
+    always @(posedge CLK) begin
+        if(IRD)
+            STATE <= {2'b00, IR[15:12]};
+        else begin
+            STATE[5] <= J[5]; STATE[4] <= J[4]; STATE[3] <= J[3]; 
+            STATE[2] <= J[2] | (BEN & (COND == 3'd2));
+            STATE[1] <= J[1] | (R & (COND == 3'd1));
+            STATE[0] <= J[0] | (IR[11] & ((COND == 3'd3)));
+        end
+
+    end
+
+    // Microsequencer Outputs (J, COND, IRD)
+    always @(*) begin
+        case(STATE)
+
+        endcase
+    end
+
+    // FSM Inputs (Datapath control signals)
+    always @(*) begin
+        case(STATE)
+
+        endcase
+    end
 
 endmodule
