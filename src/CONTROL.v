@@ -19,7 +19,6 @@ module control (
     output [1:0] ADDR2MUX,
     output [1:0] PCMUX,
     output [1:0] SR1MUX,
-    output SR2MUX,
     output [1:0] DR,
     // Tri-state buffers gate for bus
     output GateMARMUX,
