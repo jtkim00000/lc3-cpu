@@ -89,40 +89,52 @@ module lc3_cpu ();
     zext zext (.data_in(ir[7:0]), .data_out(zext_out));
 
     //Muxes
-    mux #(2, 1) miomux (
+    mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) miomux (
         .data_in({sram_out, bus}),
         .sel(mio_en),
         .out(miomux_out)
     );
 
-    mux #(2, 1) marmux (
+    mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) marmux (
         .data_in({addr_add_out, zext_out}),
         .sel(mar_mux),
         .out(marmux_out)
     );
 
-    mux #(2, 1) sr2mux (
+    mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) sr2mux (
         .data_in({sext_5_out, sr2_out}),
         .sel(ir[5]),
         .out(sr1mux_out)
     );
 
-    mux #(2, 1) addr1mux (
+    mux #(.INPUT_WIDTH(2), .SELECT_BITS(1)) addr1mux (
         .data_in({sr1_out, pc_out}),
         .sel(addr1_mux),
         .out(addr1mux_out)
     );
 
-    mux #(4, 2) addr2mux (
+    mux #(.INPUT_WIDTH(4), .SELECT_BITS(2)) addr2mux (
         .data_in({sext_11_out, sext_9_out, sext_6_out, 16'd0}),
         .sel(addr2_mux),
         .data_out(addr2mux_out)
     );
 
-    mux #(4, 2) pcmux (
-        .data_in({16'd0, addr_add_out, bus, (pc_out + 1'b1)}),
+    mux #(.INPUT_WIDTH(3), .SELECT_BITS(2)) pcmux (
+        .data_in({addr_add_out, bus, (pc_out + 1'b1)}),
         .sel(pc_mux),
         .out(pcmux_out)
+    );
+
+    mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) drmux (
+        .data_in({3'b110, 3'b111, ir[11:9]}),
+        .sel(dr_mux),
+        .out(drmux_out)
+    );
+
+    mux #(.DATA_WIDTH(3), .INPUT_WIDTH(3), .SELECT_BITS(2)) drmux (
+        .data_in({3'b110, ir[8:6], ir[11:9]}),
+        .sel(sr1_mux),
+        .out(sr1mux_out)
     );
 
     //Register file
@@ -162,7 +174,7 @@ module lc3_cpu ();
         .data_out(nzp_logic_out)
     );
 
-    register #(3) nzp (
+    register #(.WIDTH(3)) nzp (
         .clk(clk),
         .ld(ld_cc),
         .wdata(nzp_logic_out),
@@ -175,8 +187,7 @@ module lc3_cpu ();
         .ben(ben_comp_out)
     );
 
-    //NEED BEN COMP Reg
-    register #(1) ben_comp_reg (
+    register #(.WIDTH(1)) ben_comp_reg (
         .clk(clk),
         .ld(ld_ben),
         .wdata(ben_comp_out),
