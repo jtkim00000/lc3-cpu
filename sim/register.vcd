@@ -1,5 +1,5 @@
 $date
-	Tue May 26 00:24:50 2026
+	Thu May 28 01:27:39 2026
 $end
 $version
 	Icarus Verilog
@@ -8,52 +8,86 @@ $timescale
 	1ps
 $end
 $scope module tb_Register $end
-$var wire 16 ! rdata [15:0] $end
-$var reg 1 " clk $end
-$var reg 1 # ld $end
-$var reg 16 $ wdata [15:0] $end
+$var wire 3 ! rdata3 [2:0] $end
+$var wire 16 " rdata [15:0] $end
+$var reg 1 # clk $end
+$var reg 1 $ ld $end
+$var reg 16 % wdata [15:0] $end
+$var reg 3 & wdata3 [2:0] $end
 $scope module test_register $end
-$var wire 1 " clk $end
-$var wire 1 # ld $end
-$var wire 16 % rdata [15:0] $end
-$var wire 16 & wdata [15:0] $end
-$var reg 16 ' register [15:0] $end
+$var wire 1 # clk $end
+$var wire 1 $ ld $end
+$var wire 16 ' rdata [15:0] $end
+$var wire 16 ( wdata [15:0] $end
+$var parameter 32 ) WIDTH $end
+$var reg 16 * register [15:0] $end
+$upscope $end
+$scope module test_register3 $end
+$var wire 1 # clk $end
+$var wire 1 $ ld $end
+$var wire 3 + rdata [2:0] $end
+$var wire 3 , wdata [2:0] $end
+$var parameter 32 - WIDTH $end
+$var reg 3 . register [2:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
+b11 -
+b10000 )
 $end
 #0
 $dumpvars
+bx .
+bx ,
+bx +
+bx *
+b101010 (
 bx '
-b101010 &
-bx %
-b101010 $
-1#
-0"
+bx &
+b101010 %
+1$
+0#
+bx "
 bx !
 $end
 #20000
-b101010 !
-b101010 %
+b101010 "
 b101010 '
-1"
+b101010 *
+1#
 #22000
-0#
+0$
 #32000
-b1000011 $
-b1000011 &
+b1000011 %
+b1000011 (
 #40000
-0"
+0#
 #60000
-1"
+1#
 #80000
-0"
+0#
 #100000
-1"
+1#
 #120000
-0"
+0#
 #140000
-1"
+1#
 #152000
+b10 &
+b10 ,
+1$
+#160000
+0#
+#180000
+b1000011 "
+b1000011 '
+b1000011 *
+b10 !
+b10 +
+b10 .
+1#
+#182000
+0$
+#192000

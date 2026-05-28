@@ -7,139 +7,206 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
-S_0x60a546a58db0 .scope module, "tb_MUX" "tb_MUX" 2 3;
+S_0x5e72541661d0 .scope module, "tb_MUX" "tb_MUX" 2 3;
  .timescale -9 -12;
-v0x60a546a72b00_0 .var "in1", 15 0;
-v0x60a546a72be0_0 .var "in2", 15 0;
-v0x60a546a72cc0_0 .var "in3", 15 0;
-v0x60a546a72d80_0 .var "in4", 15 0;
-v0x60a546a72e60_0 .net "out2", 15 0, L_0x60a546a83440;  1 drivers
-v0x60a546a72f70_0 .net "out4", 15 0, L_0x60a546a839e0;  1 drivers
-v0x60a546a73040_0 .var "sel", 1 0;
-L_0x60a546a83580 .concat [ 16 16 0 0], v0x60a546a72b00_0, v0x60a546a72be0_0;
-L_0x60a546a83670 .part v0x60a546a73040_0, 0, 1;
-L_0x60a546a83b20 .concat [ 16 16 16 16], v0x60a546a72b00_0, v0x60a546a72be0_0, v0x60a546a72cc0_0, v0x60a546a72d80_0;
-S_0x60a546a58f40 .scope module, "text_mux_2" "mux" 2 10, 3 1 0, S_0x60a546a58db0;
+v0x5e7254186020_0 .var "in1", 15 0;
+v0x5e7254186100_0 .var "in2", 15 0;
+v0x5e72541861e0_0 .var "in3", 15 0;
+v0x5e72541862d0_0 .var "in31", 2 0;
+v0x5e72541863b0_0 .var "in32", 2 0;
+v0x5e72541864e0_0 .var "in33", 2 0;
+v0x5e72541865c0_0 .var "in4", 15 0;
+v0x5e72541866a0_0 .net "out2", 15 0, L_0x5e7254196da0;  1 drivers
+v0x5e7254186760_0 .net "out3", 2 0, L_0x5e7254197820;  1 drivers
+v0x5e7254186830_0 .net "out4", 15 0, L_0x5e72541972d0;  1 drivers
+v0x5e7254186900_0 .var "sel", 1 0;
+v0x5e72541869a0_0 .var "sel3", 1 0;
+L_0x5e7254196ee0 .concat [ 16 16 0 0], v0x5e7254186020_0, v0x5e7254186100_0;
+L_0x5e7254196fd0 .part v0x5e7254186900_0, 0, 1;
+L_0x5e7254197410 .concat [ 16 16 16 16], v0x5e7254186020_0, v0x5e7254186100_0, v0x5e72541861e0_0, v0x5e72541865c0_0;
+L_0x5e7254197960 .concat [ 3 3 3 0], v0x5e72541862d0_0, v0x5e72541863b0_0, v0x5e72541864e0_0;
+S_0x5e7254166360 .scope module, "test_mux_2" "mux" 2 12, 3 1 0, S_0x5e72541661d0;
  .timescale -9 -12;
     .port_info 0 /INPUT 32 "data_in";
     .port_info 1 /INPUT 1 "sel";
     .port_info 2 /OUTPUT 16 "out";
-P_0x60a546a44f40 .param/l "INPUT_WIDTH" 0 3 2, +C4<00000000000000000000000000000010>;
-P_0x60a546a44f80 .param/l "SELECT_BITS" 0 3 3, +C4<00000000000000000000000000000001>;
-v0x60a546a4a140_0 .net *"_ivl_0", 31 0, L_0x60a546a73110;  1 drivers
-L_0x74cbd2153018 .functor BUFT 1, C4<0000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
-v0x60a546a71ac0_0 .net *"_ivl_3", 30 0, L_0x74cbd2153018;  1 drivers
-L_0x74cbd2153060 .functor BUFT 1, C4<00000000000000000000000000010000>, C4<0>, C4<0>, C4<0>;
-v0x60a546a71ba0_0 .net/2u *"_ivl_4", 31 0, L_0x74cbd2153060;  1 drivers
-v0x60a546a71c60_0 .net *"_ivl_7", 31 0, L_0x60a546a832d0;  1 drivers
-v0x60a546a71d40_0 .net "data_in", 31 0, L_0x60a546a83580;  1 drivers
-v0x60a546a71e70_0 .net "out", 15 0, L_0x60a546a83440;  alias, 1 drivers
-v0x60a546a71f50_0 .net "sel", 0 0, L_0x60a546a83670;  1 drivers
-L_0x60a546a73110 .concat [ 1 31 0 0], L_0x60a546a83670, L_0x74cbd2153018;
-L_0x60a546a832d0 .arith/mult 32, L_0x60a546a73110, L_0x74cbd2153060;
-L_0x60a546a83440 .part/v L_0x60a546a83580, L_0x60a546a832d0, 16;
-S_0x60a546a720b0 .scope module, "text_mux_4" "mux" 2 15, 3 1 0, S_0x60a546a58db0;
+P_0x5e7254159720 .param/l "DATA_WIDTH" 0 3 2, +C4<00000000000000000000000000010000>;
+P_0x5e7254159760 .param/l "INPUT_WIDTH" 0 3 3, +C4<00000000000000000000000000000010>;
+P_0x5e72541597a0 .param/l "SELECT_BITS" 0 3 4, +C4<00000000000000000000000000000001>;
+v0x5e7254159930_0 .net *"_ivl_0", 31 0, L_0x5e7254186a80;  1 drivers
+L_0x7a0e3c7b7018 .functor BUFT 1, C4<0000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x5e7254184410_0 .net *"_ivl_3", 30 0, L_0x7a0e3c7b7018;  1 drivers
+L_0x7a0e3c7b7060 .functor BUFT 1, C4<00000000000000000000000000010000>, C4<0>, C4<0>, C4<0>;
+v0x5e72541844f0_0 .net/2u *"_ivl_4", 31 0, L_0x7a0e3c7b7060;  1 drivers
+v0x5e72541845b0_0 .net *"_ivl_7", 31 0, L_0x5e7254196c30;  1 drivers
+v0x5e7254184690_0 .net "data_in", 31 0, L_0x5e7254196ee0;  1 drivers
+v0x5e72541847c0_0 .net "out", 15 0, L_0x5e7254196da0;  alias, 1 drivers
+v0x5e72541848a0_0 .net "sel", 0 0, L_0x5e7254196fd0;  1 drivers
+L_0x5e7254186a80 .concat [ 1 31 0 0], L_0x5e7254196fd0, L_0x7a0e3c7b7018;
+L_0x5e7254196c30 .arith/mult 32, L_0x5e7254186a80, L_0x7a0e3c7b7060;
+L_0x5e7254196da0 .part/v L_0x5e7254196ee0, L_0x5e7254196c30, 16;
+S_0x5e7254184a00 .scope module, "test_mux_3" "mux" 2 23, 3 1 0, S_0x5e72541661d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 9 "data_in";
+    .port_info 1 /INPUT 2 "sel";
+    .port_info 2 /OUTPUT 3 "out";
+P_0x5e7254184be0 .param/l "DATA_WIDTH" 0 3 2, +C4<00000000000000000000000000000011>;
+P_0x5e7254184c20 .param/l "INPUT_WIDTH" 0 3 3, +C4<00000000000000000000000000000011>;
+P_0x5e7254184c60 .param/l "SELECT_BITS" 0 3 4, +C4<00000000000000000000000000000010>;
+v0x5e7254184df0_0 .net *"_ivl_0", 31 0, L_0x5e72541975a0;  1 drivers
+L_0x7a0e3c7b7138 .functor BUFT 1, C4<000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x5e7254184ef0_0 .net *"_ivl_3", 29 0, L_0x7a0e3c7b7138;  1 drivers
+L_0x7a0e3c7b7180 .functor BUFT 1, C4<00000000000000000000000000000011>, C4<0>, C4<0>, C4<0>;
+v0x5e7254184fd0_0 .net/2u *"_ivl_4", 31 0, L_0x7a0e3c7b7180;  1 drivers
+v0x5e7254185090_0 .net *"_ivl_7", 31 0, L_0x5e72541976e0;  1 drivers
+v0x5e7254185170_0 .net "data_in", 8 0, L_0x5e7254197960;  1 drivers
+v0x5e72541852a0_0 .net "out", 2 0, L_0x5e7254197820;  alias, 1 drivers
+v0x5e7254185380_0 .net "sel", 1 0, v0x5e7254186900_0;  1 drivers
+L_0x5e72541975a0 .concat [ 2 30 0 0], v0x5e7254186900_0, L_0x7a0e3c7b7138;
+L_0x5e72541976e0 .arith/mult 32, L_0x5e72541975a0, L_0x7a0e3c7b7180;
+L_0x5e7254197820 .part/v L_0x5e7254197960, L_0x5e72541976e0, 3;
+S_0x5e72541854e0 .scope module, "test_mux_4" "mux" 2 17, 3 1 0, S_0x5e72541661d0;
  .timescale -9 -12;
     .port_info 0 /INPUT 64 "data_in";
     .port_info 1 /INPUT 2 "sel";
     .port_info 2 /OUTPUT 16 "out";
-P_0x60a546a462c0 .param/l "INPUT_WIDTH" 0 3 2, +C4<00000000000000000000000000000100>;
-P_0x60a546a46300 .param/l "SELECT_BITS" 0 3 3, +C4<00000000000000000000000000000010>;
-v0x60a546a72410_0 .net *"_ivl_0", 31 0, L_0x60a546a837b0;  1 drivers
-L_0x74cbd21530a8 .functor BUFT 1, C4<000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
-v0x60a546a72510_0 .net *"_ivl_3", 29 0, L_0x74cbd21530a8;  1 drivers
-L_0x74cbd21530f0 .functor BUFT 1, C4<00000000000000000000000000010000>, C4<0>, C4<0>, C4<0>;
-v0x60a546a725f0_0 .net/2u *"_ivl_4", 31 0, L_0x74cbd21530f0;  1 drivers
-v0x60a546a726b0_0 .net *"_ivl_7", 31 0, L_0x60a546a838a0;  1 drivers
-v0x60a546a72790_0 .net "data_in", 63 0, L_0x60a546a83b20;  1 drivers
-v0x60a546a728c0_0 .net "out", 15 0, L_0x60a546a839e0;  alias, 1 drivers
-v0x60a546a729a0_0 .net "sel", 1 0, v0x60a546a73040_0;  1 drivers
-L_0x60a546a837b0 .concat [ 2 30 0 0], v0x60a546a73040_0, L_0x74cbd21530a8;
-L_0x60a546a838a0 .arith/mult 32, L_0x60a546a837b0, L_0x74cbd21530f0;
-L_0x60a546a839e0 .part/v L_0x60a546a83b20, L_0x60a546a838a0, 16;
-    .scope S_0x60a546a58db0;
+P_0x5e72541856c0 .param/l "DATA_WIDTH" 0 3 2, +C4<00000000000000000000000000010000>;
+P_0x5e7254185700 .param/l "INPUT_WIDTH" 0 3 3, +C4<00000000000000000000000000000100>;
+P_0x5e7254185740 .param/l "SELECT_BITS" 0 3 4, +C4<00000000000000000000000000000010>;
+v0x5e7254185960_0 .net *"_ivl_0", 31 0, L_0x5e72541970c0;  1 drivers
+L_0x7a0e3c7b70a8 .functor BUFT 1, C4<000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x5e7254185a40_0 .net *"_ivl_3", 29 0, L_0x7a0e3c7b70a8;  1 drivers
+L_0x7a0e3c7b70f0 .functor BUFT 1, C4<00000000000000000000000000010000>, C4<0>, C4<0>, C4<0>;
+v0x5e7254185b20_0 .net/2u *"_ivl_4", 31 0, L_0x7a0e3c7b70f0;  1 drivers
+v0x5e7254185c10_0 .net *"_ivl_7", 31 0, L_0x5e7254197160;  1 drivers
+v0x5e7254185cf0_0 .net "data_in", 63 0, L_0x5e7254197410;  1 drivers
+v0x5e7254185e20_0 .net "out", 15 0, L_0x5e72541972d0;  alias, 1 drivers
+v0x5e7254185f00_0 .net "sel", 1 0, v0x5e7254186900_0;  alias, 1 drivers
+L_0x5e72541970c0 .concat [ 2 30 0 0], v0x5e7254186900_0, L_0x7a0e3c7b70a8;
+L_0x5e7254197160 .arith/mult 32, L_0x5e72541970c0, L_0x7a0e3c7b70f0;
+L_0x5e72541972d0 .part/v L_0x5e7254197410, L_0x5e7254197160, 16;
+    .scope S_0x5e72541661d0;
 T_0 ;
-    %vpi_call 2 22 "$dumpfile", "sim/mux.vcd" {0 0 0};
-    %vpi_call 2 23 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x60a546a58db0 {0 0 0};
+    %vpi_call 2 31 "$dumpfile", "sim/mux.vcd" {0 0 0};
+    %vpi_call 2 32 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5e72541661d0 {0 0 0};
     %pushi/vec4 42, 0, 16;
-    %store/vec4 v0x60a546a72b00_0, 0, 16;
+    %store/vec4 v0x5e7254186020_0, 0, 16;
     %pushi/vec4 0, 0, 16;
-    %store/vec4 v0x60a546a72be0_0, 0, 16;
+    %store/vec4 v0x5e7254186100_0, 0, 16;
     %pushi/vec4 1, 0, 16;
-    %store/vec4 v0x60a546a72cc0_0, 0, 16;
+    %store/vec4 v0x5e72541861e0_0, 0, 16;
     %pushi/vec4 7, 0, 16;
-    %store/vec4 v0x60a546a72d80_0, 0, 16;
+    %store/vec4 v0x5e72541865c0_0, 0, 16;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v0x5e72541864e0_0, 0, 3;
+    %pushi/vec4 7, 0, 3;
+    %store/vec4 v0x5e72541863b0_0, 0, 3;
+    %pushi/vec4 2, 0, 3;
+    %store/vec4 v0x5e72541862d0_0, 0, 3;
     %pushi/vec4 0, 0, 1;
     %ix/load 4, 0, 0;
     %flag_set/imm 4, 0;
-    %store/vec4 v0x60a546a73040_0, 4, 1;
+    %store/vec4 v0x5e7254186900_0, 4, 1;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72e60_0;
+    %load/vec4 v0x5e72541866a0_0;
     %cmpi/ne 42, 0, 16;
     %jmp/0xz  T_0.0, 4;
-    %vpi_call 2 32 "$display", "FAIL MUX2 1: expected 42, got %0d", v0x60a546a72e60_0 {0 0 0};
+    %vpi_call 2 42 "$display", "FAIL MUX2 1: expected 42, got %0d", v0x5e72541866a0_0 {0 0 0};
     %jmp T_0.1;
 T_0.0 ;
-    %vpi_call 2 34 "$display", "PASS MUX2 1" {0 0 0};
+    %vpi_call 2 44 "$display", "PASS MUX2 1" {0 0 0};
 T_0.1 ;
     %pushi/vec4 1, 0, 1;
     %ix/load 4, 0, 0;
     %flag_set/imm 4, 0;
-    %store/vec4 v0x60a546a73040_0, 4, 1;
+    %store/vec4 v0x5e7254186900_0, 4, 1;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72e60_0;
+    %load/vec4 v0x5e72541866a0_0;
     %cmpi/ne 0, 0, 16;
     %jmp/0xz  T_0.2, 4;
-    %vpi_call 2 39 "$display", "FAIL MUX2 2: expected 0, got %0d", v0x60a546a72e60_0 {0 0 0};
+    %vpi_call 2 49 "$display", "FAIL MUX2 2: expected 0, got %0d", v0x5e72541866a0_0 {0 0 0};
     %jmp T_0.3;
 T_0.2 ;
-    %vpi_call 2 41 "$display", "PASS MUX2 2" {0 0 0};
+    %vpi_call 2 51 "$display", "PASS MUX2 2" {0 0 0};
 T_0.3 ;
     %pushi/vec4 0, 0, 2;
-    %store/vec4 v0x60a546a73040_0, 0, 2;
+    %store/vec4 v0x5e7254186900_0, 0, 2;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72f70_0;
+    %load/vec4 v0x5e7254186830_0;
     %cmpi/ne 42, 0, 16;
     %jmp/0xz  T_0.4, 4;
-    %vpi_call 2 47 "$display", "FAIL MUX4 1: expected 42, got %0d", v0x60a546a72f70_0 {0 0 0};
+    %vpi_call 2 57 "$display", "FAIL MUX4 1: expected 42, got %0d", v0x5e7254186830_0 {0 0 0};
     %jmp T_0.5;
 T_0.4 ;
-    %vpi_call 2 49 "$display", "PASS MUX4 1" {0 0 0};
+    %vpi_call 2 59 "$display", "PASS MUX4 1" {0 0 0};
 T_0.5 ;
     %pushi/vec4 1, 0, 2;
-    %store/vec4 v0x60a546a73040_0, 0, 2;
+    %store/vec4 v0x5e7254186900_0, 0, 2;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72f70_0;
+    %load/vec4 v0x5e7254186830_0;
     %cmpi/ne 0, 0, 16;
     %jmp/0xz  T_0.6, 4;
-    %vpi_call 2 54 "$display", "FAIL MUX4 2: expected 0, got %0d", v0x60a546a72f70_0 {0 0 0};
+    %vpi_call 2 64 "$display", "FAIL MUX4 2: expected 0, got %0d", v0x5e7254186830_0 {0 0 0};
     %jmp T_0.7;
 T_0.6 ;
-    %vpi_call 2 56 "$display", "PASS MUX4 2" {0 0 0};
+    %vpi_call 2 66 "$display", "PASS MUX4 2" {0 0 0};
 T_0.7 ;
     %pushi/vec4 2, 0, 2;
-    %store/vec4 v0x60a546a73040_0, 0, 2;
+    %store/vec4 v0x5e7254186900_0, 0, 2;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72f70_0;
+    %load/vec4 v0x5e7254186830_0;
     %cmpi/ne 1, 0, 16;
     %jmp/0xz  T_0.8, 4;
-    %vpi_call 2 61 "$display", "FAIL MUX4 3: expected 1, got %0d", v0x60a546a72f70_0 {0 0 0};
+    %vpi_call 2 71 "$display", "FAIL MUX4 3: expected 1, got %0d", v0x5e7254186830_0 {0 0 0};
     %jmp T_0.9;
 T_0.8 ;
-    %vpi_call 2 63 "$display", "PASS MUX4 3" {0 0 0};
+    %vpi_call 2 73 "$display", "PASS MUX4 3" {0 0 0};
 T_0.9 ;
     %pushi/vec4 3, 0, 2;
-    %store/vec4 v0x60a546a73040_0, 0, 2;
+    %store/vec4 v0x5e7254186900_0, 0, 2;
     %delay 10000, 0;
-    %load/vec4 v0x60a546a72f70_0;
+    %load/vec4 v0x5e7254186830_0;
     %cmpi/ne 7, 0, 16;
     %jmp/0xz  T_0.10, 4;
-    %vpi_call 2 68 "$display", "FAIL MUX4 4: expected 7, got %0d", v0x60a546a72f70_0 {0 0 0};
+    %vpi_call 2 78 "$display", "FAIL MUX4 4: expected 7, got %0d", v0x5e7254186830_0 {0 0 0};
     %jmp T_0.11;
 T_0.10 ;
-    %vpi_call 2 70 "$display", "PASS MUX4 4" {0 0 0};
+    %vpi_call 2 80 "$display", "PASS MUX4 4" {0 0 0};
 T_0.11 ;
-    %vpi_call 2 72 "$finish" {0 0 0};
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x5e72541869a0_0, 0, 2;
+    %delay 10000, 0;
+    %load/vec4 v0x5e7254186760_0;
+    %cmpi/ne 2, 0, 3;
+    %jmp/0xz  T_0.12, 4;
+    %vpi_call 2 86 "$display", "FAIL MUX3 1: expected 2, got %0d", v0x5e7254186830_0 {0 0 0};
+    %jmp T_0.13;
+T_0.12 ;
+    %vpi_call 2 88 "$display", "PASS MUX3 1" {0 0 0};
+T_0.13 ;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v0x5e72541869a0_0, 0, 2;
+    %delay 10000, 0;
+    %load/vec4 v0x5e7254186760_0;
+    %cmpi/ne 7, 0, 3;
+    %jmp/0xz  T_0.14, 4;
+    %vpi_call 2 93 "$display", "FAIL MUX3 2: expected 7, got %0d", v0x5e7254186830_0 {0 0 0};
+    %jmp T_0.15;
+T_0.14 ;
+    %vpi_call 2 95 "$display", "PASS MUX3 2" {0 0 0};
+T_0.15 ;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v0x5e72541869a0_0, 0, 2;
+    %delay 10000, 0;
+    %load/vec4 v0x5e7254186760_0;
+    %cmpi/ne 0, 0, 3;
+    %jmp/0xz  T_0.16, 4;
+    %vpi_call 2 100 "$display", "FAIL MUX3 3: expected 0, got %0d", v0x5e7254186830_0 {0 0 0};
+    %jmp T_0.17;
+T_0.16 ;
+    %vpi_call 2 102 "$display", "PASS MUX3 3" {0 0 0};
+T_0.17 ;
+    %vpi_call 2 104 "$finish" {0 0 0};
     %end;
     .thread T_0;
 # The file index is used to find the file name in the following table.

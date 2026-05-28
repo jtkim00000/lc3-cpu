@@ -9,11 +9,22 @@ module tb_Register;
 
     wire [15:0] rdata;
 
+    reg [2:0] wdata3;
+
+    wire [2:0] rdata3;
+
     register test_register (
         .clk(clk),
         .ld(ld),
         .wdata(wdata),
         .rdata(rdata)
+    );
+
+    register #(.WIDTH(3)) test_register3 (
+        .clk(clk),
+        .ld(ld),
+        .wdata(wdata3),
+        .rdata(rdata3)
     );
 
     always #20 clk = ~clk;
@@ -27,7 +38,7 @@ module tb_Register;
         //normal write then read
         ld = 1'b1; wdata = 16'd42;
 
-        @(posedge clk) 
+        @(posedge clk);
         #2;
         ld = 1'b0;
         #10
@@ -39,7 +50,7 @@ module tb_Register;
         //wrong ld
         ld = 1'b0; wdata = 16'd67;
 
-        @(posedge clk) 
+        @(posedge clk);
         #2;
         ld = 1'b0;
         #10
@@ -55,6 +66,17 @@ module tb_Register;
         else
             $display("PASS RETAIN");
 
+        //normal write then read
+        ld = 1'b1; wdata3 = 3'd2;
+
+        @(posedge clk);
+        #2;
+        ld = 1'b0;
+        #10
+        if (rdata3 != 3'd2)
+            $display("FAIL REG3: expected 2, got %0d", rdata3);
+        else
+            $display("PASS REG3");
 
         $finish;
 
