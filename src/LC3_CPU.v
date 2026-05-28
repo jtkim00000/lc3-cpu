@@ -25,7 +25,7 @@ module lc3_cpu ();
 
     //Other Registers
     wire [15:0] pc_out;
-    wire nzp_out;
+    wire [2:0] nzp_out;
     wire ben_comp_reg_out;
 
     //Branch Enable
@@ -124,9 +124,6 @@ module lc3_cpu ();
         .sel(pc_mux),
         .out(pcmux_out)
     );
-    
-    //NEED 3 bit muxes
-
 
     //Register file
     register_file register_file (
@@ -160,13 +157,17 @@ module lc3_cpu ();
     );
 
     //BEN
-
     nzp_logic nzp_logic (
         .data_in(bus),
         .data_out(nzp_logic_out)
     );
 
-    //NEED NZP Register
+    register #(3) nzp (
+        .clk(clk),
+        .ld(ld_cc),
+        .wdata(nzp_logic_out),
+        .rdata(nzp_out)
+    );
 
     ben_comp ben_comp (
         .nzp(nzp_out),
@@ -175,11 +176,17 @@ module lc3_cpu ();
     );
 
     //NEED BEN COMP Reg
+    register #(1) ben_comp_reg (
+        .clk(clk),
+        .ld(ld_ben),
+        .wdata(ben_comp_out),
+        .rdata(ben_comp_reg_out)
+    );
 
     //Control
     control control (
         .R(ready_out),
-        .BEN(ben_comp_out),
+        .BEN(ben_comp_reg_out),
         .IR(ir_out),
         .CLK(clk),
         .LD_MAR(ld_mar),

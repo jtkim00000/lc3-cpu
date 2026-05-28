@@ -1,12 +1,12 @@
 //used for PC, MAR, MDR, IR
-module register(
+module register #(parameter WIDTH = 16) (
     input clk, 
     input ld,
-    input [15:0] wdata, //write data
-    output [15:0] rdata //read data
+    input [WIDTH-1:0] wdata, //write data
+    output [WIDTH-1:0] rdata //read data
 );
 
-    reg [15:0] register;
+    reg [WIDTH-1:0] register;
 
     assign rdata = register;
 
