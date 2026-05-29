@@ -5,6 +5,7 @@ module control (
     input BEN,
     input [15:0] IR,
     input CLK,
+    input RESET,
     // Register LD signals
     output reg LD_MAR,
     output reg LD_MDR,
@@ -19,7 +20,7 @@ module control (
     output reg [1:0] ADDR2MUX,
     output reg [1:0] PCMUX,
     output reg [1:0] SR1MUX,
-    output reg [1:0] DR,
+    output reg [1:0] DRMUX,
     // Tri-state buffers gate for bus
     output reg GateMARMUX,
     output reg GateMDR,
@@ -29,10 +30,13 @@ module control (
     output reg MIO_EN,
     output reg RW,
     // ALU select bits
-    output reg [1:0] ALUK
+    output reg [1:0] ALUK,
+    output [5:0] current_state //only used for microsequencer testing
 );
 
     reg [5:0] STATE;
+
+    assign current_state = STATE;
 
     // Microsequencer
     reg IRD;
@@ -40,13 +44,17 @@ module control (
     reg [5:0] J;
 
     always @(posedge CLK) begin
-        if(IRD)
-            STATE <= {2'b00, IR[15:12]};
+        if(RESET)
+            STATE <= 6'd0;
         else begin
-            STATE[5] <= J[5]; STATE[4] <= J[4]; STATE[3] <= J[3]; 
-            STATE[2] <= J[2] | (BEN & (COND == 3'd2));
-            STATE[1] <= J[1] | (R & (COND == 3'd1));
-            STATE[0] <= J[0] | (IR[11] & ((COND == 3'd3)));
+            if(IRD)
+                STATE <= {2'b00, IR[15:12]};
+            else begin
+                STATE[5] <= J[5]; STATE[4] <= J[4]; STATE[3] <= J[3]; 
+                STATE[2] <= J[2] | (BEN & (COND == 3'd2));
+                STATE[1] <= J[1] | (R & (COND == 3'd1));
+                STATE[0] <= J[0] | (IR[11] & ((COND == 3'd3)));
+            end
         end
 
     end

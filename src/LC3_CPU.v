@@ -47,6 +47,9 @@ module lc3_cpu (input clk);
     wire [1:0] addr2_mux, dr_mux, sr1_mux, aluk, pc_mux;
     wire gate_mdr, gate_alu, gate_marmux, gate_pc;
 
+    //Unused
+    wire [5:0] current_state;
+
     /*
         Below is the instantiate modules
     */
@@ -211,14 +214,15 @@ module lc3_cpu (input clk);
         .ADDR2MUX(addr2_mux),
         .PCMUX(pc_mux),
         .SR1MUX(sr1_mux),
-        .DR(dr_mux),
+        .DRMUX(dr_mux),
         .GateMARMUX(gate_marmux),
         .GateMDR(gate_mdr),
         .GateALU(gate_alu),
         .GatePC(gate_pc),
         .MIO_EN(mio_en),
         .RW(rw),
-        .ALUK(aluk)
+        .ALUK(aluk),
+        .current_state(current_state)
     );
 
     //Tri-state buffer for Gates

@@ -1,0 +1,152 @@
+$date
+	Fri May 29 07:46:56 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_CONTROL $end
+$var wire 6 ! current_state [5:0] $end
+$var wire 2 " SR1MUX [1:0] $end
+$var wire 1 # RW $end
+$var wire 2 $ PCMUX [1:0] $end
+$var wire 1 % MIO_EN $end
+$var wire 1 & MARMUX $end
+$var wire 1 ' LD_REG $end
+$var wire 1 ( LD_PC $end
+$var wire 1 ) LD_MDR $end
+$var wire 1 * LD_MAR $end
+$var wire 1 + LD_IR $end
+$var wire 1 , LD_CC $end
+$var wire 1 - LD_BEN $end
+$var wire 1 . GatePC $end
+$var wire 1 / GateMDR $end
+$var wire 1 0 GateMARMUX $end
+$var wire 1 1 GateALU $end
+$var wire 2 2 DRMUX [1:0] $end
+$var wire 2 3 ALUK [1:0] $end
+$var wire 2 4 ADDR2MUX [1:0] $end
+$var wire 1 5 ADDR1MUX $end
+$var reg 1 6 BEN $end
+$var reg 1 7 CLK $end
+$var reg 16 8 IR [15:0] $end
+$var reg 1 9 R $end
+$var reg 1 : RESET $end
+$scope module test_control $end
+$var wire 1 6 BEN $end
+$var wire 1 7 CLK $end
+$var wire 16 ; IR [15:0] $end
+$var wire 1 9 R $end
+$var wire 1 < RESET $end
+$var wire 6 = current_state [5:0] $end
+$var reg 1 5 ADDR1MUX $end
+$var reg 2 > ADDR2MUX [1:0] $end
+$var reg 2 ? ALUK [1:0] $end
+$var reg 3 @ COND [2:0] $end
+$var reg 2 A DRMUX [1:0] $end
+$var reg 1 1 GateALU $end
+$var reg 1 0 GateMARMUX $end
+$var reg 1 / GateMDR $end
+$var reg 1 . GatePC $end
+$var reg 1 B IRD $end
+$var reg 6 C J [5:0] $end
+$var reg 1 - LD_BEN $end
+$var reg 1 , LD_CC $end
+$var reg 1 + LD_IR $end
+$var reg 1 * LD_MAR $end
+$var reg 1 ) LD_MDR $end
+$var reg 1 ( LD_PC $end
+$var reg 1 ' LD_REG $end
+$var reg 1 & MARMUX $end
+$var reg 1 % MIO_EN $end
+$var reg 2 D PCMUX [1:0] $end
+$var reg 1 # RW $end
+$var reg 2 E SR1MUX [1:0] $end
+$var reg 6 F STATE [5:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx F
+bx E
+bx D
+bx C
+xB
+bx A
+bx @
+bx ?
+bx >
+bx =
+z<
+bx ;
+1:
+x9
+bx 8
+07
+x6
+x5
+bx 4
+bx 3
+bx 2
+x1
+x0
+x/
+x.
+x-
+x,
+x+
+x*
+x)
+x(
+x'
+x&
+x%
+bx $
+x#
+bx "
+bx !
+$end
+#10000
+17
+#20000
+07
+0:
+#30000
+17
+#40000
+b1000000000000 8
+b1000000000000 ;
+06
+09
+#50000
+07
+#60000
+17
+#70000
+07
+#80000
+17
+#90000
+07
+19
+#100000
+17
+#110000
+07
+#120000
+17
+#130000
+07
+#140000
+17
+#150000
+07
+#160000
+17
+#170000
