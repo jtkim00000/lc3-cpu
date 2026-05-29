@@ -107,6 +107,16 @@ module control (
     always @(*) begin
         case(STATE)
 
+        default: begin
+            LD_MAR=0; LD_MDR=0; LD_IR=0; LD_PC=0;
+            LD_REG=0; LD_BEN=0; LD_CC=0;
+            GateMARMUX=0; GateMDR=0; GateALU=0; GatePC=0;
+            MARMUX=0; ADDR1MUX=0; ADDR2MUX=0;
+            PCMUX=0; SR1MUX=0; DRMUX=0; ALUK=0;
+            MIO_EN=0; RW=0;
+            J=6'd18; COND=3'b000; IRD=0;
+        end
+
         endcase
     end
 
