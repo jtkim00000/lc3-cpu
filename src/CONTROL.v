@@ -53,8 +53,53 @@ module control (
 
     // Microsequencer Outputs (J, COND, IRD)
     always @(*) begin
-        case(STATE)
+        // Default/Unsed States
+        IRD = 1'b0;
+        COND = 3'b000;
+        J = 6'b010010;
 
+        case(STATE)
+            6'd0:  begin IRD = 1'b0; COND = 3'b010; J = 6'b010010; end
+            6'd1:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd2:  begin IRD = 1'b0; COND = 3'b000; J = 6'b011001; end
+            6'd3:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010111; end
+            6'd4:  begin IRD = 1'b0; COND = 3'b011; J = 6'b010100; end
+            6'd5:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd6:  begin IRD = 1'b0; COND = 3'b000; J = 6'b011001; end
+            6'd7:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010111; end
+            6'd8:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd9:  begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd10: begin IRD = 1'b0; COND = 3'b000; J = 6'b011000; end
+            6'd11: begin IRD = 1'b0; COND = 3'b000; J = 6'b011101; end
+            6'd12: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd13: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd14: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd15: begin IRD = 1'b0; COND = 3'b000; J = 6'b011100; end
+            6'd16: begin IRD = 1'b0; COND = 3'b001; J = 6'b010000; end
+            6'd17: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd18: begin IRD = 1'b0; COND = 3'b101; J = 6'b100001; end
+            6'd19: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd20: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd21: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd22: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd23: begin IRD = 1'b0; COND = 3'b000; J = 6'b010000; end
+            6'd24: begin IRD = 1'b0; COND = 3'b001; J = 6'b011000; end
+            6'd25: begin IRD = 1'b0; COND = 3'b001; J = 6'b011001; end
+            6'd26: begin IRD = 1'b0; COND = 3'b000; J = 6'b011001; end
+            6'd27: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd28: begin IRD = 1'b0; COND = 3'b001; J = 6'b011100; end
+            6'd29: begin IRD = 1'b0; COND = 3'b001; J = 6'b011101; end
+            6'd30: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd31: begin IRD = 1'b0; COND = 3'b000; J = 6'b010111; end
+            6'd32: begin IRD = 1'b1; COND = 3'bx;   J = 6'bx;      end
+            6'd33: begin IRD = 1'b0; COND = 3'b001; J = 6'b100001; end
+            6'd34: begin IRD = 1'b0; COND = 3'b000; J = 6'b010010; end
+            6'd35: begin IRD = 1'b0; COND = 3'b000; J = 6'b100000; end
+            default: begin 
+                IRD = 1'b0; 
+                COND = 3'b000; 
+                J = 6'b010010; 
+            end
         endcase
     end
 
