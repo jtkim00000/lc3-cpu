@@ -6,30 +6,30 @@ module control (
     input [15:0] IR,
     input CLK,
     // Register LD signals
-    output LD_MAR,
-    output LD_MDR,
-    output LD_IR,
-    output LD_PC,
-    output LD_REG,
-    output LD_BEN,
-    output LD_CC,
+    output reg LD_MAR,
+    output reg LD_MDR,
+    output reg LD_IR,
+    output reg LD_PC,
+    output reg LD_REG,
+    output reg LD_BEN,
+    output reg LD_CC,
     // MUX select bits
-    output MARMUX,
-    output ADDR1MUX,
-    output [1:0] ADDR2MUX,
-    output [1:0] PCMUX,
-    output [1:0] SR1MUX,
-    output [1:0] DR,
+    output reg MARMUX,
+    output reg ADDR1MUX,
+    output reg [1:0] ADDR2MUX,
+    output reg [1:0] PCMUX,
+    output reg [1:0] SR1MUX,
+    output reg [1:0] DR,
     // Tri-state buffers gate for bus
-    output GateMARMUX,
-    output GateMDR,
-    output GateALU,
-    output GatePC,
+    output reg GateMARMUX,
+    output reg GateMDR,
+    output reg GateALU,
+    output reg GatePC,
     // Memory
-    output MIO_EN,
-    output RW,
+    output reg MIO_EN,
+    output reg RW,
     // ALU select bits
-    output [1:0] ALUK
+    output reg [1:0] ALUK
 );
 
     reg [5:0] STATE;
@@ -100,258 +100,194 @@ module control (
 
     // FSM Inputs (Datapath control signals)
     always @(*) begin
+
+        LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b0; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
+        GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
+        MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
+        PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
+        MIO_EN=1'b0; RW=1'b0;
+
         case(STATE)
 
             6'd0:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                //No Changes
             end
 
             6'd1:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1; LD_CC=1'b1;
+                GateALU=1'b1;
+                SR1MUX=2'b01; DRMUX=2'b00; ALUK=2'b00;
             end
 
             6'd2:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b0; ADDR2MUX=2'b10;
             end
 
             6'd3:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b0; ADDR2MUX=2'b10;
             end
 
             6'd4:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1;
+                GatePC=1'b1;
+                DRMUX=2'b01;
             end
 
             6'd5:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1; LD_CC=1'b1;
+                GateALU=1'b1;
+                SR1MUX=2'b01; DRMUX=2'b00; ALUK=2'b01;
             end
 
             6'd6:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b1; ADDR2MUX=2'b01;
+                SR1MUX=2'b01;
             end
 
             6'd7:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b1; ADDR2MUX=2'b01;
+                SR1MUX=2'b01;
             end
 
             6'd9:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1; LD_CC=1'b1;
+                GateALU=1'b1;
+                SR1MUX=2'b01; DRMUX=2'b00; ALUK=2'b10;
             end
 
             6'd10:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b0; ADDR2MUX=2'b10;
             end
 
             6'd11:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b0; ADDR2MUX=2'b10;
             end
 
             6'd12:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_PC=1'b1;
+                GateALU=1'b1;
+                PCMUX=2'b01; SR1MUX=2'b01; ALUK=2'b11;
             end
 
             6'd14:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1; LD_CC=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b1; ADDR1MUX=1'b0; ADDR2MUX=2'b10;
+                DRMUX=2'b00;
             end
 
             6'd15:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMARMUX=1'b1;
+                MARMUX=1'b0;
             end
 
             6'd16:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                MIO_EN=1'b1; RW=1'b1;
             end
 
             6'd18:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1; LD_PC=1'b1;
+                GatePC=1'b1;
+                PCMUX=2'b00;
             end
 
             6'd20:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_PC=1'b1;
+                GateALU=1'b1;
+                PCMUX=2'b01; SR1MUX=2'b01; ALUK=2'b11;
             end
 
             6'd21:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_PC=1'b1;
+                ADDR1MUX=1'b0; ADDR2MUX=2'b11;
+                PCMUX=2'b10;
             end
 
             6'd22:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_PC=1'b1;
+                ADDR1MUX=1'b0; ADDR2MUX=2'b10;
+                PCMUX=2'b10;
             end
 
             6'd23:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1;
+                GateALU=1'b1;
+                SR1MUX=2'b00; ALUK=2'b11;
             end
 
             6'd24:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1;
+                MIO_EN=1'b1; RW=1'b0;
             end
 
             6'd25:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1;
+                MIO_EN=1'b1; RW=1'b0;
             end
 
             6'd26:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMDR=1'b1;
             end
 
             6'd27:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_REG=1'b1; LD_CC=1'b1;
+                GateMDR=1'b1;
+                DRMUX=2'b00;
             end
 
             6'd28:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1; LD_REG=1'b1;
+                GatePC=1'b1;
+                DRMUX=2'b01;
+                MIO_EN=1'b1; RW=1'b0;
             end
 
             6'd29:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1;
+                MIO_EN=1'b1; RW=1'b0;
             end
 
             6'd30:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_PC=1'b1;
+                GateMDR=1'b1;
+                PCMUX=2'b01;
             end
 
             6'd31:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MAR=1'b1;
+                GateMDR=1'b1;
             end
 
             6'd32:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_BEN=1'b1;
             end
 
             6'd33:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+                LD_MDR=1'b1;
+                MIO_EN=1'b1; RW=1'b0;
             end
 
-            6'd33:  begin 
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
-                GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
-                MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
-                PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
-                MIO_EN=1'b0; RW=1'b0;
+            6'd35:  begin 
+                LD_IR=1'b1;
+                GateMDR=1'b1;
             end
 
             default: begin
-                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
+                LD_MAR=1'b0; LD_MDR=1'b0; LD_IR=1'b0; LD_PC=1'b0; LD_REG=1'b0; LD_BEN=1'b0; LD_CC=1'b0;
                 GateMARMUX=1'b0; GateMDR=1'b0; GateALU=1'b0; GatePC=1'b0;
                 MARMUX=1'b0; ADDR1MUX=1'b0; ADDR2MUX=2'b00;
                 PCMUX=2'b00; SR1MUX=2'b00; DRMUX=2'b00; ALUK=2'b00;
