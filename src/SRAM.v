@@ -8,10 +8,10 @@ module sram (
     output reg [15:0] data_out
 ); // 64k x 16 RAM
     reg [1:0] counter;
-    reg [15:0] mem [65536:0];
+    reg [15:0] mem [0:65536];
 
     initial begin
-        $readmemh("test_program.hex", mem, 16'h3000);
+        $readmemh("prog/test_program.hex", mem, 16'h3000);
     end
 
     //counter for ready signal is not needed but good practice

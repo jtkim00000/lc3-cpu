@@ -50,7 +50,8 @@ module lc3_cpu (input clk, input reset);
     wire [5:0] current_state;
 
     //Only used for testing
-    assign pcmux_out_final = RESET ? 16'h3000 : pcmux_out;
+    wire [15:0] pcmux_out_final;
+    assign pcmux_out_final = reset ? 16'h3000 : pcmux_out;
 
     /*
         Below is the instantiate modules
@@ -80,7 +81,7 @@ module lc3_cpu (input clk, input reset);
 
     register pc (
         .clk(clk),
-        .ld(ld_pc | RESET),
+        .ld(ld_pc | reset),
         .wdata(pcmux_out_final),
         .rdata(pc_out)
     );
