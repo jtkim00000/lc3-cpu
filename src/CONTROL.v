@@ -45,18 +45,17 @@ module control (
 
     always @(posedge CLK) begin
         if(RESET)
-            STATE <= 6'd0;
+            STATE <= 6'd18;
+        else if(IRD)
+            STATE <= {2'b00, IR[15:12]};
         else begin
-            if(IRD)
-                STATE <= {2'b00, IR[15:12]};
-            else begin
-                STATE[5] <= J[5]; STATE[4] <= J[4]; STATE[3] <= J[3]; 
-                STATE[2] <= J[2] | (BEN & (COND == 3'd2));
-                STATE[1] <= J[1] | (R & (COND == 3'd1));
-                STATE[0] <= J[0] | (IR[11] & ((COND == 3'd3)));
-            end
+            STATE <= {
+                J[5], J[4], J[3],
+                J[2] | (BEN & (COND == 3'd2)),
+                J[1] | (R   & (COND == 3'd1)),
+                J[0] | (IR[11] & (COND == 3'd3))
+            };
         end
-
     end
 
     // Microsequencer Outputs (J, COND, IRD)
