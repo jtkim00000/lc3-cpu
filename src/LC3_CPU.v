@@ -80,8 +80,8 @@ module lc3_cpu (input clk, input reset);
 
     register pc (
         .clk(clk),
-        .ld(ld_pc),
-        .wdata(pcmux_out),
+        .ld(ld_pc | RESET),
+        .wdata(pcmux_out_final),
         .rdata(pc_out)
     );
 
