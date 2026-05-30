@@ -1,9 +1,8 @@
-module lc3_cpu (input clk);
+module lc3_cpu (input clk, input reset);
 
     /*
         Below are the wires that connect modules together
     */
-
     wire [15:0] bus;
 
     //Memory
@@ -49,6 +48,9 @@ module lc3_cpu (input clk);
 
     //Unused
     wire [5:0] current_state;
+
+    //Only used for testing
+    assign pcmux_out_final = RESET ? 16'h3000 : pcmux_out;
 
     /*
         Below is the instantiate modules
@@ -173,7 +175,7 @@ module lc3_cpu (input clk);
     //BEN
     nzp_logic nzp_logic (
         .data_in(bus),
-        .data_out(nzp_logic_out)
+        .nzp(nzp_logic_out)
     );
 
     register #(.WIDTH(3)) nzp (
@@ -231,6 +233,6 @@ module lc3_cpu (input clk);
                     gate_mdr    ? mdr_out    :
                     gate_alu    ? alu_out    :
                     gate_marmux ? marmux_out :
-                    16'h0000;
+                    16'bz;
 
 endmodule

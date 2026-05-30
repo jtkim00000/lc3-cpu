@@ -66,7 +66,7 @@ module tb_CONTROL;
         CLK = 1'b0;
 
         $dumpfile("sim/control.vcd");
-        $dumpvars(0, tb_CONTROL);
+        $dumpvars(0, tb_Control);
 
         //RESET to state 18
         CLK = 1'b0;

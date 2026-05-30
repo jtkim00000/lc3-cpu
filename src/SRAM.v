@@ -10,6 +10,10 @@ module sram (
     reg [1:0] counter;
     reg [15:0] mem [65536:0];
 
+    initial begin
+        $readmemh("test_program.hex", mem, 16'h3000);
+    end
+
     //counter for ready signal is not needed but good practice
     always @(posedge clk) begin
         if(cs) begin
