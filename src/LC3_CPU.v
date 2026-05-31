@@ -205,6 +205,7 @@ module lc3_cpu (input clk, input reset);
         .BEN(ben_comp_reg_out),
         .IR(ir_out),
         .CLK(clk),
+        .RESET(reset),
         .LD_MAR(ld_mar),
         .LD_MDR(ld_mdr),
         .LD_IR(ld_ir),
