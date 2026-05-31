@@ -82,9 +82,11 @@ The SRAM (`sram.v`) models a synchronous 64K x 16 memory with a ready signal (wh
 This ready signal forces the control unit to wait in a memory stall state until `Ready` is seen.
 
 ### Control
-The control unit (`control.v`) is a microprogrammed FSM implementing the LC-3 microsequencer described in Patt & Patel. The FSM is shown below.
+The control unit (`control.v`) is a microprogrammed FSM implementing the LC-3 microsequencer described in Patt & Patel. The FSM diagram is shown below.
 
 ![fsm](docs/lc3-fsm.png)
+
+*RTI and 1101 instructions were not implemented
 
 The control module consists of two parts:
 
