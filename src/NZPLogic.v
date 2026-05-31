@@ -1,3 +1,12 @@
+/* 
+    NZP Logic
+
+    Combinational logic circuit that uses whatever data is on the bus as an input
+
+    It then interprets this vector as a 2's compliment value, and outs puts a 3-bit vector corresponding to the sign
+
+*/
+
 module nzp_logic (
     input [15:0] data_in,
     output reg [2:0] nzp

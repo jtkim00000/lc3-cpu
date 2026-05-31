@@ -1,3 +1,16 @@
+/* 
+    Register File
+
+    Basic register file implementation of the LC-3
+
+    8 Registers, R0-R7
+
+    sychronous write and two asynchronous 
+    
+    LD.REG signal to control write
+
+*/
+
 module register_file(
     input clk, // clock
     input ld, // LD - write enable

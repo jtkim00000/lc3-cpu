@@ -1,3 +1,15 @@
+/*
+    Microprogrammed Control Unit
+
+    Implements the LC-3 microsequencer and FSM output logic
+
+    The microsequencer computes the next state each clock cycle
+
+    On RESET, the state register initializes to state 18 (fetch).
+
+    Outputs control signals that control the datpath
+*/
+
 
 //all caps is used for easier wiring of datapath
 module control (

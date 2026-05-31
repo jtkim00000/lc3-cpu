@@ -1,3 +1,11 @@
+/* 
+    Standard register module used for PC, IR, MAR, MDR, NZP, BEN_COMP, etc.
+
+    Registers are synchronous write and asynchronous reads
+
+*/
+
+
 //used for PC, MAR, MDR, IR
 module register #(parameter WIDTH = 16) (
     input clk, 

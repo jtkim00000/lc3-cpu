@@ -1,3 +1,12 @@
+/* 
+    LC3 CPU Implementation
+
+    Instantiates all compoents and wires them together to implement the LC-3 datapath (view docs/lc3-datapath.png)
+
+    Inputs are the clk and reset. Reset is used to set the program counter to x3000 and start at the fetch state, starting a program.
+*/
+
+
 module lc3_cpu (input clk, input reset);
 
     /*

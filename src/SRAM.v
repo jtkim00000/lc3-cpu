@@ -1,3 +1,13 @@
+/* 
+    64k x 16 SRAM
+
+    As the name suggests there are 64k address locations, each with 16 bit addressability. 
+
+    Programs are loaded in using a readmemh with a hex file, with PC initialized to x3000
+
+    ready signal is used to simulate memory latency, although it is not required
+*/
+
 module sram (
     input clk,
     input cs,   //MIO.EN
