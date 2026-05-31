@@ -38,7 +38,7 @@ The following 14 instructions were implemented in this project:
 ### CPU
 The CPU is implemented as a single top-level module (`lc3_cpu.v`) that instantiates and connects all datapath and control components. It contains a 16-bit bus that components communicate through. The bus is driven by either zero or one of four sources at any given time, selected by tri-state buffer gate control signals (`GatePC`, `GateMDR`, `GateALU`, `GateMARMUX`) asserted by the control unit. (My RTL implementation models this as a mux with default as high-Z, rather than as 4 tri-state buffers)
 
-On reset, the program counter is initialized to `x3000`, which is the standard LC-3 user program start address. The control unit is also reset to state 18, the first state of the fetch cycle.
+On reset, the program counter is initialized to `x3000`. The control unit is also reset to state 18, the first state of the fetch cycle.
 
 The datapath follows the standard LC-3 design from Patt & Patel. The diagram below shows the implemented datapath.
 
@@ -47,7 +47,7 @@ The datapath follows the standard LC-3 design from Patt & Patel. The diagram bel
 ### Memory
 The LC-3 uses a 64K x 16 SRAM with a 16-bit address space, corresponding to 2^16 = 65,536 memory locations, each location with 16-bit addressability.
 
-Memory is accessed through the MAR (Memory Address Register) and MDR (Memory Data Register). To perform a read, the control unit loads the target address into MAR, asserts `MIO.EN` with `R/W=0`, and waits for the `Ready` signal before loading MDR with the result. A write follows the same sequence with `R/W=1` and the write data pre-loaded into MDR through the bus.
+Memory is accessed through the MAR (Memory Address Register) and MDR (Memory Data Register). To perform a read, the control unit loads the target address into MAR, asserts `MIO.EN` with `R/W=0`, and waits for the `Ready` signal before loading MDR with the result. A write follows the same sequence with `R/W=1` and the write data is loaded into MDR through the bus.
 
 Programs are loaded into memory before the CPU runs using `$readmemh`, starting at address `x3000`.
 
@@ -63,32 +63,24 @@ The Arithmetic Logic Unit (ALU) (`alu.v`) performs four operations selected by a
 | 10   | NOT: ~A    |
 | 11   | PASS A     |
 
-The PASS A operation is used when the ALU drives some value to the bus but no computation is needed. fFor example, forwarding a base register value for a JMP or JSRR instruction (This can also be done using the MARMUX signals, but I chose the ALU for a slightly simpler output control signal). Inputs A and B come from SR1OUT and SR2MUX respectively as shown in the datapath.
+The PASS A operation is used when the ALU drives some value to the bus but no computation is needed. For example, forwarding a base register value for a JMP or JSRR instruction (This can also be done using the MARMUX signals, but I chose the ALU for a slightly simpler output control signal). Inputs A and B come from SR1OUT and SR2MUX respectively as shown in the datapath.
 
 ### Register File
-The register file (`register_file.v`) contains 8 16-bit registers (R0–R7). It supports one synchronous write and two asynchronous reads per cycle. The write is gated by `LD.REG` and the destination register is selected by DRMUX. The two source registers are selected by SR1MUX and IR[2:0] respectively.
+The register file (`register_file.v`) contains 8 16-bit registers (R0–R7). It supports one synchronous write and two asynchronous reads per cycle. The write is controled by `LD.REG` and the destination register is selected by DRMUX. The two source registers are selected by SR1MUX and IR[2:0] respectively.
 
 ### BEN
 The Branch Enable (BEN) logic determines whether a branch instruction should be taken. It consists of two parts:
 
-**NZP Logic** (`nzp_logic.v`): A combinational module that computes the N, Z, P condition codes from whatever value is currently on the bus. N is set if the value is negative (bit 15 = 1), Z if the value is zero, and P otherwise.
+**NZP Logic** (`nzp_logic.v`): A combinational module that computes the N, Z, P condition codes from whatever value is currently on the bus. N is set if the value is negative (when interpreted as 2's compliment), Z if the value is zero, and P otherwise.
 
-**BEN Comparator** (`ben_comp.v`): A combinational module that ANDs the current NZP condition code register with the n, z, p bits from IR[11:9] and ORs the results:
-```
-BEN = (N & IR[11]) | (Z & IR[10]) | (P & IR[9])
-```
+**BEN Comparator** (`ben_comp.v`): A module that checks if any bits from NZP and IR[11:9] match (Based on BR instruction). 
 
-The BEN output is stored in a 1-bit register. It is then fed back into the microsequencer as a condition input to determine whether the branch state should be taken.
+The BEN output is stored in a 1-bit register. It is then fed into the control unit as an input to determine whether the branch state should be taken.
 
 ### SRAM
-The SRAM (`sram.v`) models a synchronous 64K x 16 memory with a ready signal (which is not require but used to simulate realistic memory latency). When `MIO.EN` is asserted, an internal counter increments each clock cycle. After 2 cycles (somewhat arbitrarily chosen value), the `Ready` signal is asserted and the memory operation completes.
+The SRAM (`sram.v`) models a synchronous 64K x 16 memory with a ready signal (which is not required but used to simulate memory latency). When `MIO.EN` is asserted, an internal counter increments each clock cycle. After 2 cycles (somewhat arbitrarily chosen value), the `Ready` signal is asserted and the memory operation completes.
 
 This ready signal forces the control unit to wait in a memory stall state until `Ready` is seen.
-
-Programs are loaded at simulation time using:
-```verilog
-$readmemh("prog/program.hex", mem, 16'h3000);
-```
 
 ### Control
 The control unit (`control.v`) is a microprogrammed FSM implementing the LC-3 microsequencer described in Patt & Patel. The FSM is shown below.
@@ -113,7 +105,6 @@ A diagram of the microsequencer is shown below.
 ![microsequencer](docs/lc3-microsequencer.png)
 
 **Output Logic**: For each state, an always block asserts the appropriate datapath control signals — load enables, gate selects, MUX selects, ALU operation, and memory control. Each microinstruction's control signal was determined by infering off the datapath and fsm description. And image of the FSM is shown below.
-
 
 ### Other
 
@@ -159,34 +150,30 @@ The program is loaded into the SRAM starting at `x3000` using `$readmemh`. After
 
 **Program listing** (`prog/test_program.hex`):
 
-image bere
-
-
+![program](docs/test_program_bin.png)
 
 **Expected final register values:**
 
 | Register | Value |
 |----------|-------|
-| R0 | x3074 |
-| R1 | x3073 |
-| R2 | xFFFF |
-| R3 | x301E |
-| R4 | x3021 | 
-| R5 | x3073 |
-| R6 | x3021 |
-| R7 | x3023 |
+| R0 | x3073 |
+| R1 | x3072 |
+| R2 | xFFFE |
+| R3 | x301D |
+| R4 | x3020 | 
+| R5 | x3072 |
+| R6 | x3020 |
+| R7 | x3022 |
+| NZP | 001 |
 
 **Expected memory values:**
 | Address | Value |
 |---------|-------|
-| x3073 | x3074 |
-| x3074 | x3073 |
-| x3075 | x3073 |
-| x307D | x0000 |
-| x307E | x0005 |
-| x307F | x0008 |
-| x3080 | x0000 |
-| x3081 | xFFFF |
-
-A breakdown of the assembly code and final expected values is shown below as proof that the CPU works as intended.
-image here
+| x3072 | x3073 |
+| x3073 | x3072 |
+| x3074 | x3072 |
+| x307C | x0000 |
+| x307D | x0005 |
+| x307E | x0008 |
+| x307F | x0001 |
+| x3080 | xFFFE |
