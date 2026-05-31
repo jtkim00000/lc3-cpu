@@ -33,7 +33,7 @@ Each instruction in the LC-3 ISA is 16 bits wide. Bits [15:12] specify the opcod
 
 The following 14 instructions were implemented in this project:
 
-![instructions](docs/lc3-instruction-encodings.png)
+![instructions](docs/instruction-encodings.png)
 
 ### CPU
 The CPU is implemented as a single top-level module (`lc3_cpu.v`) that instantiates and connects all datapath and control components. It contains a 16-bit bus that components communicate through. The bus is driven by either zero or one of four sources at any given time, selected by tri-state buffer gate control signals (`GatePC`, `GateMDR`, `GateALU`, `GateMARMUX`) asserted by the control unit. (My RTL implementation models this as a mux with default as high-Z, rather than as 4 tri-state buffers)
@@ -91,7 +91,11 @@ $readmemh("prog/program.hex", mem, 16'h3000);
 ```
 
 ### Control
-The control unit (`control.v`) is a microprogrammed FSM implementing the LC-3 microsequencer described in Patt & Patel. It consists of two parts:
+The control unit (`control.v`) is a microprogrammed FSM implementing the LC-3 microsequencer described in Patt & Patel. The FSM is shown below.
+
+![fsm](docs/lc3-fsm.png)
+
+The control module consists of two parts:
 
 **Microsequencer**: Computes the next state each clock cycle. The next state is determined by a 6-bit value assembled from the J field, conditionally modified by BEN, R, and IR[11] depending on the COND field:
 
@@ -106,7 +110,7 @@ During the decode state (state 32), `IRD=1` overrides the normal next-state logi
 
 A diagram of the microsequencer is shown below.
 
-image here
+![microsequencer](docs/lc3-microsequencer.png)
 
 **Output Logic**: For each state, an always block asserts the appropriate datapath control signals — load enables, gate selects, MUX selects, ALU operation, and memory control. Each microinstruction's control signal was determined by infering off the datapath and fsm description. And image of the FSM is shown below.
 
