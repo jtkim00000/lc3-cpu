@@ -19,7 +19,6 @@ This is a personal project where I built an RTL implementation of the LC-3 CPU f
     - [SEXT/ZEXT](#sextzext)
 - [Simulation](#simulation)
   - [Test Program](#test-program)
-- [Tools](#tools)
 
 ## Overview
 Little Computer 3, or LC-3, is primarily an instruction set architecture (ISA) designed as an educational tool for computer architecture and assembly language programming, developed by Dr. Yale Patt and Dr. Sanjay Patel.
