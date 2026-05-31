@@ -105,9 +105,9 @@ A diagram of the microsequencer is shown below.
 
 ![microsequencer](docs/lc3-microsequencer.png)
 
-**Output Logic**: For each state, an always block asserts the appropriate datapath control signals — load enables, gate selects, MUX selects, ALU operation, and memory control. Each microinstruction's control signal was determined by infering off the datapath and fsm description. And image of the FSM is shown below.
+**Output Logic**: For each state, an always block asserts the appropriate datapath control signals — load enables, gate selects, MUX selects, ALU operation, and memory control. Each microinstruction's control signal was determined by infering off the datapath and fsm description.
 
-All outputs for both the microsequencer and the datapath contol signals can be found in the docs folder.
+*All outputs for both the microsequencer and the datapath contol signals can be found in the docs folder.
 
 ### Other
 
