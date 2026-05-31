@@ -95,9 +95,9 @@ The control module consists of two parts:
 | COND | Condition |
 |------|-----------|
 | 000  | Unconditional (next state = J) |
-| 001  | Memory ready: J[1] \|= R |
-| 010  | Branch enable: J[2] \|= BEN |
-| 011  | JSR mode bit: J[0] \|= IR[11] |
+| 001  | Memory ready: R |
+| 010  | Branch enable: BEN |
+| 011  | JSR mode bit: IR[11] |
 
 During the decode state (state 32), `IRD=1` overrides the normal next-state logic and forces the next state to `{2'b00, IR[15:12]}`, jumping directly to the first execution state of the fetched instruction.
 
